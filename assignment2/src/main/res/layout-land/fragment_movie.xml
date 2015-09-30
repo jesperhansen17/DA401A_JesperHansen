@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!--A horizontal LinearLayout that holds a fanart image and a scrollview
+        that holds the movie summary-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <!--ImageView that holds the movie fanart-->
+        <ImageView
+            android:id="@+id/fanart_imageView"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY" />
+
+        <!--Scrollview that holds a textview containing movie summar-->
+        <ScrollView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/summary_textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:padding="16dp"/>
+        </ScrollView>
+    </LinearLayout>
+
+    <!--A vertical LinearLayout that holds movie title and release year-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/actionbar_background"
+        android:elevation="10dp">
+
+        <TextView
+            android:id="@+id/title_year_imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            android:paddingStart="16dp"
+            android:textColor="@color/actionbar_text"/>
+    </LinearLayout>
+</LinearLayout>
+

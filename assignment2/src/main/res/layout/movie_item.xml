@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <!--An RelativeView that holds the movie poster, title and release year-->
+    <ImageView
+        android:id="@+id/posterImageView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignBottom="@+id/posterImageView" >
+
+        <TextView
+            android:id="@+id/movie_title_year"
+            android:layout_width="match_parent"
+            android:layout_height="68dp"       
+            android:padding="16dp"
+            android:textColor="@color/text_color_movie_item"
+            android:textSize="14sp"
+            android:background="@color/background_transparent"/>
+    </LinearLayout>
+</RelativeLayout>
