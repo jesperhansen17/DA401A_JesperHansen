@@ -15,10 +15,8 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.GridView;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import jesperhansen.assignment5.R;
 
 /**
@@ -29,6 +27,7 @@ public class MoviesFragment extends Fragment {
     public static List<Movie> mMovieList = new ArrayList<>();
     private MovieAdapter mMovieAdapter;
     private List<Integer> mMarkedMovies = new ArrayList<>();
+    private String TAG = "MoviesFragment";
 
     public MoviesFragment() {
         // Required empty public constructor
@@ -75,6 +74,7 @@ public class MoviesFragment extends Fragment {
             public void onItemCheckedStateChanged(ActionMode mode, int position, long id, boolean checked) {
                 final int selectCount = gridView.getCheckedItemCount();
 
+                //mode.setCustomView(getActivity().findViewById(R.id.toolbar));
                 mode.setTitle(selectCount + " is selected");
 
                 mMovieAdapter.toggleSelection(position);
@@ -83,7 +83,6 @@ public class MoviesFragment extends Fragment {
             @Override
             public boolean onCreateActionMode(ActionMode mode, Menu menu) {
                 mode.getMenuInflater().inflate(R.menu.movie_menu, menu);
-
                 return true;
             }
 
@@ -97,11 +96,15 @@ public class MoviesFragment extends Fragment {
                 switch (item.getItemId()) {
                     case R.id.menu_delete_icon:
                         SparseBooleanArray selected = mMovieAdapter.getSelectedMovies();
-
+                        Log.d(TAG, "" + selected.size());
                         for (int i = (selected.size() - 1); i >= 0; i--) {
                             if (selected.valueAt(i)) {
+                                Log.d(TAG, "ValueAt: " + selected.valueAt(i));
                                 Movie selectedMovies = (Movie) mMovieAdapter.getItem(selected.keyAt(i));
+                                Log.i(TAG, "Selected movie: " + selectedMovies.getTitle());
+                                Log.i(TAG, "KeyAt: " + selected.keyAt(i));
                                 mMovieAdapter.removeMovie(selectedMovies);
+                                selected.clear();
                             }
                         }
                         mode.finish();

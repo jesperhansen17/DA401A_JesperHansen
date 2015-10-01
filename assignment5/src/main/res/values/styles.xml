@@ -5,7 +5,7 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="Theme.MyTheme" parent="Theme.AppCompat.NoActionBar">
+    <style name="Theme.MyTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Set AppCompat’s actionBarStyle -->
         <item name="actionBarStyle">@style/MyActionBarStyle</item>
 
@@ -16,6 +16,10 @@
         <!-- colorAccent is used as the default value for colorControlActivated,
          which is used to tint widgets -->
         <item name="colorAccent">@color/accent</item>
+
+        <!-- This changes the Contextual Bar, in my app when a movie is longpressed -->
+        <item name="android:actionModeBackground">@color/my_awesome_red</item>
+        <item name="windowActionModeOverlay">true</item>
 
         <!-- You can also set colorControlNormal, colorControlActivated
              colorControlHighlight, and colorSwitchThumbNormal. -->

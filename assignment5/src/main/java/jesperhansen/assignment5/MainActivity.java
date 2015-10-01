@@ -9,11 +9,12 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.Window;
 
 
 public class MainActivity extends AppCompatActivity {
     private FragmentAdapter mFragmentAdapter;
-    //private Toolbar mToolbar;
+    private Toolbar mToolbar;
     private ViewPager mViewPager;
     private TabLayout mTabLayout;
 
@@ -23,8 +24,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        //setSupportActionBar(mToolbar);
+
+
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setTitle("Switcher");
 
         mFragmentAdapter = new FragmentAdapter(getSupportFragmentManager());
 

@@ -84,7 +84,6 @@ public class MovieAdapter extends BaseAdapter {
 
     public void removeMovie(Movie checkedMovies) {
         mMovieList.remove(checkedMovies);
-        Log.i("MoviesFragment", "Deleted: " + checkedMovies);
         notifyDataSetChanged();
     }
 }
