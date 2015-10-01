@@ -1,20 +1,25 @@
-package jesperhansen.assignment5;
+package jesperhansen.assignment5.MoviesFragment;
 
 
 import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
+import android.util.SparseBooleanArray;
+import android.view.ActionMode;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.GridView;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import jesperhansen.assignment5.R;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -22,6 +27,8 @@ import java.util.List;
 public class MoviesFragment extends Fragment {
     // A ArrayList that holds an List of Movie objects
     public static List<Movie> mMovieList = new ArrayList<>();
+    private MovieAdapter mMovieAdapter;
+    private List<Integer> mMarkedMovies = new ArrayList<>();
 
     public MoviesFragment() {
         // Required empty public constructor
@@ -55,12 +62,60 @@ public class MoviesFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_movies, container, false);
 
         // Connect a gridview to the gridview in the XML
-        GridView gridView = (GridView) v.findViewById(R.id.movie_grid_view);
+        final GridView gridView = (GridView) v.findViewById(R.id.movie_grid_view);
 
         // Create a Adapter for bridging the data to the layout
-        MovieAdapter movieAdapter = new MovieAdapter(mMovieList, getActivity().getLayoutInflater());
+        mMovieAdapter = new MovieAdapter(mMovieList, getActivity().getLayoutInflater());
 
-        gridView.setAdapter(movieAdapter);
+        gridView.setAdapter(mMovieAdapter);
+
+        gridView.setChoiceMode(GridView.CHOICE_MODE_MULTIPLE_MODAL);
+        gridView.setMultiChoiceModeListener(new AbsListView.MultiChoiceModeListener() {
+            @Override
+            public void onItemCheckedStateChanged(ActionMode mode, int position, long id, boolean checked) {
+                final int selectCount = gridView.getCheckedItemCount();
+
+                mode.setTitle(selectCount + " is selected");
+
+                mMovieAdapter.toggleSelection(position);
+            }
+
+            @Override
+            public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+                mode.getMenuInflater().inflate(R.menu.movie_menu, menu);
+
+                return true;
+            }
+
+            @Override
+            public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+                return false;
+            }
+
+            @Override
+            public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.menu_delete_icon:
+                        SparseBooleanArray selected = mMovieAdapter.getSelectedMovies();
+
+                        for (int i = (selected.size() - 1); i >= 0; i--) {
+                            if (selected.valueAt(i)) {
+                                Movie selectedMovies = (Movie) mMovieAdapter.getItem(selected.keyAt(i));
+                                mMovieAdapter.removeMovie(selectedMovies);
+                            }
+                        }
+                        mode.finish();
+                        return true;
+                    default:
+                        return false;
+                }
+            }
+
+            @Override
+            public void onDestroyActionMode(ActionMode mode) {
+
+            }
+        });
 
         //gridView.setOnItemClickListener(new GridClick());
 
@@ -79,16 +134,6 @@ public class MoviesFragment extends Fragment {
 
             // Create a FragmentTransaction
             getFragmentManager().beginTransaction().replace(R.id.view_pager, movieFragment).addToBackStack(null).commit();
-
-            // Replace current fragment with quoteDayFragment
-            //transaction.replace(R.id.view_pager, movieFragment);
-
-            // Add current fragment to the back stack
-            //transaction.addToBackStack(null);
-
-            //transaction.commit();
-
-
         }
     }
 

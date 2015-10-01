@@ -1,5 +1,7 @@
 package jesperhansen.assignment5;
 
+import android.annotation.TargetApi;
+import android.os.Build;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -11,17 +13,18 @@ import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity {
     private FragmentAdapter mFragmentAdapter;
-    private Toolbar mToolbar;
+    //private Toolbar mToolbar;
     private ViewPager mViewPager;
     private TabLayout mTabLayout;
 
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(mToolbar);
+        //mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        //setSupportActionBar(mToolbar);
 
         mFragmentAdapter = new FragmentAdapter(getSupportFragmentManager());
 
@@ -30,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
         mTabLayout = (TabLayout) findViewById(R.id.tab_layout);
         mTabLayout.setupWithViewPager(mViewPager);
+        mTabLayout.setElevation(10);
 
         mTabLayout.getTabAt(0).setText("Movies");
         mTabLayout.getTabAt(1).setText("Quote");

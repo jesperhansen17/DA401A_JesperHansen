@@ -3,6 +3,8 @@ package jesperhansen.assignment5;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import jesperhansen.assignment5.MoviesFragment.MoviesFragment;
+import jesperhansen.assignment5.QuoteFragment.QuoteFragment;
 
 public class FragmentAdapter extends FragmentStatePagerAdapter {
     public FragmentAdapter(FragmentManager fragmentManager) {

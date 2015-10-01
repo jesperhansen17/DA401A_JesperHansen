@@ -1,5 +1,7 @@
-package jesperhansen.assignment5;
+package jesperhansen.assignment5.MoviesFragment;
 
+import android.util.Log;
+import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,12 +11,15 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import jesperhansen.assignment5.R;
+
 /**
  * MovieAdapter for bridging data with xml files
  */
 public class MovieAdapter extends BaseAdapter {
     private List<Movie> mMovieList;
     private LayoutInflater mLayoutInflater;
+    private SparseBooleanArray mSelectedMovies;
 
     /**
      * Constructor for the Adapter
@@ -24,6 +29,7 @@ public class MovieAdapter extends BaseAdapter {
     public MovieAdapter(List<Movie> mMovieList, LayoutInflater mLayoutInflater) {
         this.mMovieList = mMovieList;
         this.mLayoutInflater = mLayoutInflater;
+        mSelectedMovies = new SparseBooleanArray();
     }
 
     @Override
@@ -57,5 +63,28 @@ public class MovieAdapter extends BaseAdapter {
         titleTextView.setText(((Movie) getItem(position)).getTitle() + "\n" + ((Movie) getItem(position)).getYear());
 
         return convertView;
+    }
+
+    public void toggleSelection(int position) {
+        selectView(position, !mSelectedMovies.get(position));
+    }
+
+    public void selectView(int position, boolean value) {
+        if (value) {
+            mSelectedMovies.put(position, value);
+        } else {
+            mSelectedMovies.delete(position);
+        }
+        notifyDataSetChanged();
+    }
+
+    public SparseBooleanArray getSelectedMovies() {
+        return mSelectedMovies;
+    }
+
+    public void removeMovie(Movie checkedMovies) {
+        mMovieList.remove(checkedMovies);
+        Log.i("MoviesFragment", "Deleted: " + checkedMovies);
+        notifyDataSetChanged();
     }
 }

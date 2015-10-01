@@ -1,4 +1,4 @@
-package jesperhansen.assignment5;
+package jesperhansen.assignment5.MoviesFragment;
 
 import android.graphics.drawable.Drawable;
 

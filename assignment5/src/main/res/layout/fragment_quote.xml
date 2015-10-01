@@ -1,9 +1,29 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" tools:context="jesperhansen.assignment5.QuoteFragment">
+    android:layout_height="match_parent"
+    tools:context="com.da401a.jesper.android.assignment1.QuoteFragment"
+    android:orientation="vertical"
+    android:background="#fafafa">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView android:layout_width="match_parent" android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/quoteTxt"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:layout_gravity="center_horizontal"
+        android:textColor="#000000"
+        android:paddingBottom="15dp"
+        android:paddingTop="20dp" />
 
-</FrameLayout>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/quoteBtn"
+        android:id="@+id/btn"
+        android:layout_gravity="center_horizontal"
+        android:background="#6bc46d"
+        android:elegantTextHeight="true"
+        android:textColor="#feffffff" />
+
+</LinearLayout>

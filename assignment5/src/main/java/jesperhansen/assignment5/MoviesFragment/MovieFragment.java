@@ -1,4 +1,4 @@
-package jesperhansen.assignment5;
+package jesperhansen.assignment5.MoviesFragment;
 
 
 import android.os.Bundle;
@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import jesperhansen.assignment5.R;
 
 
 /**

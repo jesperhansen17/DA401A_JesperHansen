@@ -2,6 +2,35 @@
     <string name="app_name">Navigation</string>
     <string name="action_settings">Settings</string>
 
-<!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- TextViews -->
+    <string name="quoteTxt">Press to get the quote of the day!</string>
+
+    <!-- Buttons -->
+    <string name="quoteBtn">Get Quote</string>
+
+    <!-- QuoteDay Fragment -->
+    <string name="quoteDay">Quote of the day!</string>
+    <string-array name="quoteArray">
+        <item>I like boring things...</item>
+        <item>If opportunity do not knock, build a door.</item>
+        <item>Out if difficulties grow miracles.</item>
+        <item>Whoever is happy will make others happy to.</item>
+        <item>You must do the things you think you think cannot do.</item>
+    </string-array>
+
+    <!-- String for the conversion of month to strings -->
+    <string-array name="months">
+        <item>January</item>
+        <item>February</item>
+        <item>March</item>
+        <item>April</item>
+        <item>May</item>
+        <item>June</item>
+        <item>July</item>
+        <item>August</item>
+        <item>September</item>
+        <item>October</item>
+        <item>November</item>
+        <item>December</item>
+    </string-array>
 </resources>
