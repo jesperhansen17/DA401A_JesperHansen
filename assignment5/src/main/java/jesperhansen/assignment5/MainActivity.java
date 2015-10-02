@@ -24,23 +24,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(mToolbar);
-        getSupportActionBar().setTitle("Switcher");
-
         mFragmentAdapter = new FragmentAdapter(getSupportFragmentManager());
-
-        mViewPager = (ViewPager) findViewById(R.id.view_pager);
-        mViewPager.setAdapter(mFragmentAdapter);
-
-        mTabLayout = (TabLayout) findViewById(R.id.tab_layout);
-        mTabLayout.setupWithViewPager(mViewPager);
-        mTabLayout.setElevation(10);
-
-        mTabLayout.getTabAt(0).setText("Movies");
-        mTabLayout.getTabAt(1).setText("Quote");
+        setupToolbar();
+        setupTablayout();
     }
 
     @Override
@@ -63,5 +49,22 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void setupToolbar() {
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setTitle("Switcher");
+    }
+
+    private void setupTablayout() {
+        mViewPager = (ViewPager) findViewById(R.id.view_pager);
+        mViewPager.setAdapter(mFragmentAdapter);
+
+        mTabLayout = (TabLayout) findViewById(R.id.tab_layout);
+        mTabLayout.setupWithViewPager(mViewPager);
+
+        mTabLayout.getTabAt(0).setText("Movies");
+        mTabLayout.getTabAt(1).setText("Quote");
     }
 }

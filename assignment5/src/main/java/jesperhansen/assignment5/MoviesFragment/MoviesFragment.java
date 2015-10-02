@@ -1,8 +1,10 @@
 package jesperhansen.assignment5.MoviesFragment;
 
 
+import android.content.Context;
 import android.content.res.TypedArray;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.util.SparseBooleanArray;
@@ -25,8 +27,11 @@ import jesperhansen.assignment5.R;
 public class MoviesFragment extends Fragment {
     // A ArrayList that holds an List of Movie objects
     public static List<Movie> mMovieList = new ArrayList<>();
+    // MovieAdapter for the GridView
     private MovieAdapter mMovieAdapter;
-    private List<Integer> mMarkedMovies = new ArrayList<>();
+    // Instance of the Vibrator
+    private Vibrator vibrate;
+    // A TAG for Log.d debugger
     private String TAG = "MoviesFragment";
 
     public MoviesFragment() {
@@ -36,6 +41,9 @@ public class MoviesFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Initialize the vibrator
+        vibrate = (Vibrator) getActivity().getSystemService(Context.VIBRATOR_SERVICE);
 
         // Array that get the Arrays of movie information from movies.xml
         TypedArray movies = getResources().obtainTypedArray(R.array.movies);
@@ -66,22 +74,32 @@ public class MoviesFragment extends Fragment {
         // Create a Adapter for bridging the data to the layout
         mMovieAdapter = new MovieAdapter(mMovieList, getActivity().getLayoutInflater());
 
+        // Set the Adapter to the GridView
         gridView.setAdapter(mMovieAdapter);
 
+        // The list allows multiple choices
         gridView.setChoiceMode(GridView.CHOICE_MODE_MULTIPLE_MODAL);
+
+        // Set an MultiChoiceListener to the Gridview so that the user can be able to
+        // longpress Movies to select them
         gridView.setMultiChoiceModeListener(new AbsListView.MultiChoiceModeListener() {
             @Override
             public void onItemCheckedStateChanged(ActionMode mode, int position, long id, boolean checked) {
                 final int selectCount = gridView.getCheckedItemCount();
 
-                //mode.setCustomView(getActivity().findViewById(R.id.toolbar));
+                // Tells the user how many
                 mode.setTitle(selectCount + " is selected");
 
+                // Sends which position that is pressed to the Adapter
                 mMovieAdapter.toggleSelection(position);
+
+                // Vibrate the phone to enhance that you longpressed a Movie
+                vibrate.vibrate(25);
             }
 
             @Override
             public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+                // Inflate the movie_menu that holds the delete icon
                 mode.getMenuInflater().inflate(R.menu.movie_menu, menu);
                 return true;
             }
@@ -94,16 +112,23 @@ public class MoviesFragment extends Fragment {
             @Override
             public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
                 switch (item.getItemId()) {
+                    // If the delete icon is pressed go in to the case
                     case R.id.menu_delete_icon:
+                        // Create an SparseBooleanArray that is an Array that map Integers and Booleans,
+                        // key:int and value:bool
+                        // I put the int position as the key,
+                        // the bool as the value. So that I can check if the item is being checked or unchecked
                         SparseBooleanArray selected = mMovieAdapter.getSelectedMovies();
-                        Log.d(TAG, "" + selected.size());
+
+                        // Loop through the SparsBooleanArray from back to front
                         for (int i = (selected.size() - 1); i >= 0; i--) {
+                            // If the bool at position is true (movie item checked), enter the if case
                             if (selected.valueAt(i)) {
-                                Log.d(TAG, "ValueAt: " + selected.valueAt(i));
+                                // Get the Movie object that is pressed
                                 Movie selectedMovies = (Movie) mMovieAdapter.getItem(selected.keyAt(i));
-                                Log.i(TAG, "Selected movie: " + selectedMovies.getTitle());
-                                Log.i(TAG, "KeyAt: " + selected.keyAt(i));
+                                // Delete the Movie from the GridView
                                 mMovieAdapter.removeMovie(selectedMovies);
+                                // Clear the SparseBooleanArray so that it can be reused
                                 selected.clear();
                             }
                         }
@@ -120,6 +145,7 @@ public class MoviesFragment extends Fragment {
             }
         });
 
+        // TODO: Not currently working, needs fix before I can press an MoviePoster
         //gridView.setOnItemClickListener(new GridClick());
 
         return v;
@@ -139,5 +165,4 @@ public class MoviesFragment extends Fragment {
             getFragmentManager().beginTransaction().replace(R.id.view_pager, movieFragment).addToBackStack(null).commit();
         }
     }
-
 }

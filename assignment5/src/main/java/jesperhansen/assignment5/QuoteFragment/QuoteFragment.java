@@ -43,7 +43,9 @@ public class QuoteFragment extends Fragment {
 
         // Create a button view
         View button_view = v.findViewById(R.id.btn);
-        button_view.setOnClickListener(new ButtonClick());
+
+        // TODO: Not currently working, needs fix before I can press an MoviePoster
+        //button_view.setOnClickListener(new ButtonClick());
         return v;
     }
 

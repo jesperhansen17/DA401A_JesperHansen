@@ -1,5 +1,6 @@
 package jesperhansen.assignment5;
 
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -15,11 +16,11 @@ public class FragmentAdapter extends FragmentStatePagerAdapter {
         Fragment fragment = null;
         switch (position) {
             case 0:
-                // Create Fragment
+                // Create MoviesFragment
                 fragment = new MoviesFragment();
                 break;
             case 1:
-                // Create Fragment
+                // Create QuoteFragment
                 fragment = new QuoteFragment();
                 break;
             default:

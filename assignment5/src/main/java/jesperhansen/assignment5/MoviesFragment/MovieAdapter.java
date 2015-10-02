@@ -65,25 +65,33 @@ public class MovieAdapter extends BaseAdapter {
         return convertView;
     }
 
+    // Sends the pressed position and boolean as a true
     public void toggleSelection(int position) {
         selectView(position, !mSelectedMovies.get(position));
     }
 
+    // If value is true add the position as key and value as value to an
+    // SparseBooleanArray
     public void selectView(int position, boolean value) {
         if (value) {
             mSelectedMovies.put(position, value);
         } else {
             mSelectedMovies.delete(position);
         }
+        // Notify adapter that data has changed
         notifyDataSetChanged();
     }
 
+    // Return the SparseBooleanArray
     public SparseBooleanArray getSelectedMovies() {
         return mSelectedMovies;
     }
 
+    // Removes the MovieObject from the ArrayList that holds the Movie object
     public void removeMovie(Movie checkedMovies) {
         mMovieList.remove(checkedMovies);
+
+        // Notify adapter thet data has changed
         notifyDataSetChanged();
     }
 }

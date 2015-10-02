@@ -8,7 +8,7 @@
     <!-- TabLayout -->
     <color name="unfocused_tab">#3f000000</color>
     <color name="focused_tab">#212121</color>
-    <color name="background_tab">#FFFFFF</color>
+    <color name="background_tab">#F44336</color>
 
     <color name="background_transparent">#3f000000</color>
 </resources>
