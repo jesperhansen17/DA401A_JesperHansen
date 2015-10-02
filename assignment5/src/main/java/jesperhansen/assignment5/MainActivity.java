@@ -1,15 +1,13 @@
 package jesperhansen.assignment5;
 
-import android.annotation.TargetApi;
-import android.os.Build;
+import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.Window;
+import android.widget.Toast;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -18,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager mViewPager;
     private TabLayout mTabLayout;
 
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    //@TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,13 +39,16 @@ public class MainActivity extends AppCompatActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        switch (item.getItemId()) {
+            // If the settings button is pressed in the Toolbar, show a Toast
+            case R.id.action_settings:
+                Toast.makeText(this, "Settings clicked", Toast.LENGTH_SHORT).show();
+                break;
+            // If the info button in the Toolbar is pressed, show a Toast
+            case R.id.action_info:
+                Toast.makeText(this, "About clicked", Toast.LENGTH_SHORT).show();
+                break;
         }
-
         return super.onOptionsItemSelected(item);
     }
 

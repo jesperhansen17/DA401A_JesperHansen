@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">Navigation</string>
+
+    <!-- Menu Actions -->
+    <string name="action_info">Information</string>
     <string name="action_settings">Settings</string>
 
     <!-- TextViews -->
