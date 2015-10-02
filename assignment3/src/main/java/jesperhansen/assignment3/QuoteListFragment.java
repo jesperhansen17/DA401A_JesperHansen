@@ -27,7 +27,7 @@ public class QuoteListFragment extends Fragment {
     private ProgressBar mProgressBar;
 
     // The address to the QuoteGenerator
-    private static String url = "https://api.github.com/zen?access_token=0f892e365071c7e778a020e463d715b8ccb816f5";
+    private static String url = "https://api.github.com/zen?access_token=c257f45a39882e6bc6b76b3f1c06929c04f7b8f4";
 
     public QuoteListFragment() {
         // Required empty public constructor

@@ -1,6 +1,5 @@
 package jesperhansen.assignment3;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,7 +41,7 @@ public class QuoteAdapter extends BaseAdapter {
         }
 
         TextView quoteTextView = (TextView) convertView.findViewById(R.id.quote_text_view);
-        //quoteTextView.setText(getItem(position).toString());
+        quoteTextView.setText(getItem(position).toString());
 
         return convertView;
     }
